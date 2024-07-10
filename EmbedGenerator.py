@@ -107,7 +107,7 @@ async def generateLogEmbedPublic(vote: Vote):
 
 
 async def generateDividerEmbed():
-    embed = Embed(title=f"Aktuelle Satzung von {datetime.datetime.now().strftime(r"%Y/%m/%d, %H:%M")}", description="", color=0x05a4fa, type="rich")
+    embed = Embed(title=f"Aktuelle Satzung von {datetime.datetime.now().strftime('%Y/%m/%d, %H:%M')}", description="", color=0x05a4fa, type="rich")
     embed.set_author(name="Democracy Bot", icon_url=BotIcon)
     return embed
 

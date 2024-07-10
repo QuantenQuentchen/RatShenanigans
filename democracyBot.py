@@ -1,15 +1,15 @@
 import discord
 from discord.ext import commands, tasks
 import sqlite3
-import Views
-import VoteManager
-import EmbedGenerator as EmbedGenerator
 from dotenv import load_dotenv
 import os
 import random
 import datetime
-from lxml import html
 import math
+
+import Views
+import VoteManager
+import EmbedGenerator as EmbedGenerator
 
 base = 6.52
 
@@ -262,10 +262,6 @@ def transfer_balance(sender_id, receiver_id, amount):
     remove_balance(sender_id, amount)
     add_balance(receiver_id, amount)
 
-async def add_constitution_change(title, description):
-    cursor.execute("INSERT INTO constitution_changes (title, description) VALUES (?, ?)", (title, description))
-    connection.commit()
-
 bot = commands.Bot("DEMOCRACY!", intents=discord.Intents.default())
 
 Token = os.getenv("DISCORD_BOT_TOKEN")
@@ -339,8 +335,8 @@ async def gamble(ctx,
     guild_ids=[776823258385088552],
 )
 async def addMoney(ctx, 
-                target: discord.Option(discord.Member, name="reciever", description="The user you want to give money to", required=True),
-                amount: discord.Option(int, name="amount", description="The amount of money you want to give", required=True)
+                target: discord.Option(discord.Member, name="reciever", description="The user you want to give money to", required=True), # type: ignore
+                amount: discord.Option(int, name="amount", description="The amount of money you want to give", required=True) # type: ignore
     ):
     if checkRoles(ctx):
         if amount <= 0:
@@ -356,7 +352,10 @@ async def addMoney(ctx,
     description="[Debug] Give money to another user",
     guild_ids=[776823258385088552],
 )
-async def removeMoney(ctx, target: discord.Option(discord.Member, name="reciever", description="The user you want to give money to", required=True), amount: discord.Option(int, name="amount", description="The amount of money you want to give", required=True)):
+async def removeMoney(ctx, 
+                    target: discord.Option(discord.Member, name="reciever", description="The user you want to give money to", required=True), # type: ignore
+                    amount: discord.Option(int, name="amount", description="The amount of money you want to give", required=True) # type: ignore
+    ):
     if checkRoles(ctx):
         if amount <= 0:
             await ctx.respond("You can't remove a negative amount of money", ephemeral=True)
@@ -371,7 +370,10 @@ async def removeMoney(ctx, target: discord.Option(discord.Member, name="reciever
     description="[Debug] Set Money of user",
     guild_ids=[776823258385088552],
 )
-async def setMoney(ctx, target: discord.Option(discord.Member, name="reciever", description="The user you want to give money to", required=True), amount: discord.Option(int, name="amount", description="The amount of money you want to give", required=True)):
+async def setMoney(ctx,
+                    target: discord.Option(discord.Member, name="reciever", description="The user you want to give money to", required=True), # type: ignore
+                    amount: discord.Option(int, name="amount", description="The amount of money you want to give", required=True) # type: ignore
+    ):
     if checkRoles(ctx):
         if amount <= 0:
             await ctx.respond("You can't set a negative amount of money", ephemeral=True)
@@ -387,8 +389,9 @@ async def setMoney(ctx, target: discord.Option(discord.Member, name="reciever", 
     guild_ids=[776823258385088552],
 )
 async def transfer(ctx,
-                target: discord.Option(discord.Member, name="reciever", description="The user you want to transfer money to", required=True),
-                amount: discord.Option(int, name="amount", description="The amount of money you want to transfer", required=True)):
+                target: discord.Option(discord.Member, name="reciever", description="The user you want to transfer money to", required=True), # type: ignore
+                amount: discord.Option(int, name="amount", description="The amount of money you want to transfer", required=True) # type: ignore
+    ):
     if amount <= 0:
         await ctx.respond("You can't transfer a negative amount of money", ephemeral=True)
         return
@@ -566,8 +569,8 @@ async def debuGStockUpdate():
     guild_ids=[776823258385088552],
 )
 async def changeStock(ctx, 
-                    company_id: discord.Option(int, name="company_id", description="Unternehmen ID", required=True), 
-                    value: discord.Option(int, name="wert", description="Der neue Wert", required=True)
+                    company_id: discord.Option(int, name="company_id", description="Unternehmen ID", required=True), # type: ignore
+                    value: discord.Option(int, name="wert", description="Der neue Wert", required=True) # type: ignore
     ):
     if checkRoles(ctx):
         set_company_value(company_id, value)
@@ -580,8 +583,8 @@ async def changeStock(ctx,
     guild_ids=[776823258385088552],
 )
 async def addCompany(ctx, 
-                    name: discord.Option(str, name="name", description="The name of the company", required=True),
-                    value: discord.Option(float, name="value", description="The value of the company", required=True)
+                    name: discord.Option(str, name="name", description="The name of the company", required=True), # type: ignore
+                    value: discord.Option(float, name="value", description="The value of the company", required=True) # type: ignore
     ):
     if checkRoles(ctx):
         add_company(name, value)
@@ -593,7 +596,7 @@ async def addCompany(ctx,
     guild_ids=[776823258385088552],
 )
 async def removeCompany(ctx, 
-                    company_id: discord.Option(int, name="company_id", description="The id of the company", required=True)
+                    company_id: discord.Option(int, name="company_id", description="The id of the company", required=True) # type: ignore
     ):
     if checkRoles(ctx):
         cur.execute("DELETE FROM companies WHERE company_id = ?", (company_id,))
