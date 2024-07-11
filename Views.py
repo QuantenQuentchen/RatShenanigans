@@ -1,6 +1,9 @@
 import discord
 from VoteManager import VoteManager as VoteManager
 import EmbedGenerator as EmbedGenerator
+from Government.constitutionManager import constitutionManager as cm
+from privilegeManager import privilegeManager
+from databaseManager import dbManager
 
 LogChannel = 1242236502486810657
 
@@ -8,24 +11,17 @@ ConstitutionChannel = 1259988043327340745
 
 Vorsitz = 1242213719795171378
 Stellvertreter = 1242232096370462751
-MANN = 1242196287676223538
 
 VoteChannel = 1260247977075671050
 
+privMen = privilegeManager.getInstance()
 
+dbM = dbManager.getInstance()
 
-allowedRoles = {Vorsitz, Stellvertreter, MANN}
+MichiID = 546434993690247191
 
-def checkRole(member: discord.Member):
-    for role in member.roles:
-        if role.id in allowedRoles:
-            return True
-    return False
-
-
-async def sendVote(bot, embed, view):
-    channel = bot.get_channel(VoteChannel)
-    await channel.send(f"<@&{MANN}>", embed=embed, view=view)
+async def sendVote(embed, view):
+    await cm.getInstance().sendOnVoteChannel(message=privMen.mentionMANN,embed=embed, view=view)
 
 
 async def startNoAbstainVote(vote, guildID, bot):
@@ -68,7 +64,7 @@ class VoteView(discord.ui.View):
 
     @discord.ui.button(label="Pro", style=discord.ButtonStyle.green)
     async def pro(self, button: discord.ui.Button, interaction: discord.Interaction):
-        if not checkRole(interaction.user):
+        if not privMen.isMANN(interaction.user.roles):
             await interaction.response.send_message("You are not allowed to vote", ephemeral=True)
             return
         
@@ -78,7 +74,7 @@ class VoteView(discord.ui.View):
     
     @discord.ui.button(label="Enthaltung", style=discord.ButtonStyle.grey)
     async def abstain(self, button: discord.ui.Button, interaction: discord.Interaction):
-        if not checkRole(interaction.user):
+        if not privMen.isMANN(interaction.user.roles):
             await interaction.response.send_message("You are not allowed to vote", ephemeral=True)
             return
         if self.noAbstain:
@@ -92,10 +88,37 @@ class VoteView(discord.ui.View):
     
     @discord.ui.button(label="Con", style=discord.ButtonStyle.red)
     async def contra(self, button: discord.ui.Button, interaction: discord.Interaction):
-        if not checkRole(interaction.user):
+        if not privMen.isMANN(interaction.user.roles):
             await interaction.response.send_message("You are not allowed to vote", ephemeral=True)
             return
         
         VoteManager.getVoteManager(interaction.guild.id).getVote(self.voteID).addCon(interaction.user.id)
 
         await interaction.response.send_message("Voted Con", ephemeral=True)
+
+
+class MemoryView(discord.ui.View):
+
+    def __init__(self, bot: discord.Client, memoryId: int):
+        super().__init__(timeout=60)
+        self.bot = bot
+        self.memoryId = memoryId
+        self.wasClicked = False
+
+    
+    async def on_timeout(self):
+        await self.message.edit(embed= await EmbedGenerator.generateMemoryTimeoutEmbed(),view=None)
+        print("Timeout Memory")
+
+    @discord.ui.button(label="Answer", style=discord.ButtonStyle.green)
+    async def answer(self, button: discord.ui.Button, interaction: discord.Interaction):
+        if(interaction.user.id == MichiID):
+            self.wasClicked = True
+            await self.message.edit(embed=await EmbedGenerator.generateMemoryAnswerEmbed(dbM.get_question, dbM.get_answer), view=None)
+            await interaction.response.send_message("Nice", ephemeral=True)
+    
+    @discord.ui.button(label="Skip", style=discord.ButtonStyle.grey)
+    async def skip(self, button: discord.ui.Button, interaction: discord.Interaction):
+        if(interaction.user.id == MichiID):
+            self.wasClicked = True
+            await interaction.response.send_message("Boooo!!", ephemeral=True)

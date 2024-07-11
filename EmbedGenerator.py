@@ -5,7 +5,9 @@ from VoteData import Vote
 BotIcon = r"https://d3i6fh83elv35t.cloudfront.net/static/2022/03/2022-03-23T224553Z_1063185917_RC2L8T9JT4FJ_RTRMADP_3_UKRAINE-CRISIS-UN-1024x683.jpg"
 CapBotIcon = r"https://snworksceo.imgix.net/ids/d3a1e224-68b7-4c79-9388-e209f65026b1.sized-1000x1000.png?w=1000"
 ErgebnissIcon = r"https://images.csmonitor.com/csm/2019/02/0201-MANNESS.jpg?alias=standard_900x600"
-
+JuraBotIcon = r"https://i.pinimg.com/originals/24/3e/eb/243eeb242e6db73ff318fcbeebab726e.png"
+HappyEGirl = r"https://t4.ftcdn.net/jpg/02/69/23/65/360_F_269236515_jUKu2chuA6WGl36fCqlmsw8cwGp4ICLr.jpg"
+BadEgirl = r"https://c8.alamy.com/comp/2GP6D6J/disappointed-asian-teen-girl-shows-regret-pointing-and-looking-left-with-sulking-frowning-face-standing-upset-over-white-background-2GP6D6J.jpg"
 enum = {
     "simple": 0,
     "qualified": 1,
@@ -105,6 +107,22 @@ async def generateLogEmbedPublic(vote: Vote):
 
     return embed
 
+async def generateMemoryQuestionEmbed(question):
+    embed = Embed(title=question, description="", color=0x1d05fa, type="rich", timestamp=datetime.datetime.now())
+    embed.set_author(name="Jura Bot", icon_url=JuraBotIcon)
+    return embed
+
+async def generateMemoryAnswerEmbed(question, answer):
+    embed = Embed(title=question, description=answer, color=0x1d05fa, type="rich", timestamp=datetime.datetime.now())
+    embed.set_author(name="Jura Bot", icon_url=JuraBotIcon)
+    embed.set_thumbnail(url=HappyEGirl)
+    return embed
+
+async def generateMemoryTimeoutEmbed():
+    embed = Embed(title="Timeout", description="Du hast zu lange gebraucht, du fucking Looser, und du bist black", color=0x1d05fa, type="rich", timestamp=datetime.datetime.now())
+    embed.set_author(name="Jura Bot", icon_url=JuraBotIcon)
+    embed.set_thumbnail(url=BadEgirl)
+    return embed
 
 async def generateDividerEmbed():
     embed = Embed(title=f"Aktuelle Satzung von {datetime.datetime.now().strftime('%Y/%m/%d, %H:%M')}", description="", color=0x05a4fa, type="rich")
