@@ -1,4 +1,4 @@
-from BotManager import BotManager
+from discordBackend.BotManager import BotManager
 class ChannelManager():
     ChannelManagers = {}
     

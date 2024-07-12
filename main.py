@@ -2,10 +2,10 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 import os
-from BotManager import BotManager
-from databaseManager import dbManager
+from discordBackend.BotManager import BotManager
+from Backend.databaseManager import dbManager
 import logging
-from privilegeManager import privilegeManager
+from discordBackend.privilegeManager import privilegeManager
 
 privMen = privilegeManager.getInstance()
 

@@ -1,10 +1,10 @@
 import discord
 
-import EmbedGenerator
-from databaseManager import dbManager
+import discordBackend.EmbedGenerator as EmbedGenerator
+from Backend.databaseManager import dbManager
 from Economy.manage import get_balance, add_balance, remove_balance, transfer_balance, getWertinEUR
 from Economy.math import getChance, calcChance
-from BotManager import BotManager
+from discordBackend.BotManager import BotManager
 
 econ = BotManager.getBot().create_group("econ", "Economy commands")
 

@@ -1,6 +1,6 @@
 import datetime
 from discord import Embed
-from VoteData import Vote
+from VoteSystem.VoteData import Vote
 
 BotIcon = r"https://d3i6fh83elv35t.cloudfront.net/static/2022/03/2022-03-23T224553Z_1063185917_RC2L8T9JT4FJ_RTRMADP_3_UKRAINE-CRISIS-UN-1024x683.jpg"
 CapBotIcon = r"https://snworksceo.imgix.net/ids/d3a1e224-68b7-4c79-9388-e209f65026b1.sized-1000x1000.png?w=1000"

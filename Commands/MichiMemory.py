@@ -1,6 +1,6 @@
-from databaseManager import dbManager
-from privilegeManager import privilegeManager
-from BotManager import BotManager
+from Backend.databaseManager import dbManager
+from discordBackend.privilegeManager import privilegeManager
+from discordBackend.BotManager import BotManager
 import discord
 
 privMen = privilegeManager.getInstance()

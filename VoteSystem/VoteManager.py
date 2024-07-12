@@ -1,4 +1,4 @@
-import VoteData
+import VoteSystem.VoteData as VoteData
 
 class VoteManager:
     VoteManagers = {}

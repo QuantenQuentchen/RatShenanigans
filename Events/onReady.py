@@ -1,4 +1,4 @@
-from BotManager import BotManager
+from discordBackend.BotManager import BotManager
 from Routines.memory import randoPush
 from Economy.manage import stockUpdate
 

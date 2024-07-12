@@ -1,4 +1,4 @@
-from databaseManager import dbManager
+from Backend.databaseManager import dbManager
 
 class constitutionManager():
 

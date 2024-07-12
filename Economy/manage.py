@@ -2,11 +2,11 @@ import datetime
 
 from discord.ext import tasks
 
-from databaseManager import dbManager
-from ChannelManager import ChannelManager
-import EmbedGenerator
+from Backend.databaseManager import dbManager
+from discordBackend.ChannelManager import ChannelManager
+import discordBackend.EmbedGenerator as EmbedGenerator
 import Economy.math as math
-from BotManager import BotManager
+from discordBackend.BotManager import BotManager
 
 dbM = dbManager.getInstance()
 

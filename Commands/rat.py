@@ -1,8 +1,8 @@
 from discord import SlashCommandGroup
 
 from Government.constitutionManager import constitutionManager
-import EmbedGenerator
-from BotManager import BotManager
+import discordBackend.EmbedGenerator as EmbedGenerator
+from discordBackend.BotManager import BotManager
 
 
 rat = BotManager.getBot().create_group("rat", "Mitglieder des Rates")

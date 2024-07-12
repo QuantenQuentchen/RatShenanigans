@@ -1,9 +1,9 @@
 import discord
-from VoteManager import VoteManager as VoteManager
-import EmbedGenerator as EmbedGenerator
-from ChannelManager import ChannelManager
-from privilegeManager import privilegeManager
-from databaseManager import dbManager
+from VoteSystem.VoteManager import VoteManager as VoteManager
+import discordBackend.EmbedGenerator as EmbedGenerator
+from discordBackend.ChannelManager import ChannelManager
+from discordBackend.privilegeManager import privilegeManager
+from Backend.databaseManager import dbManager
 
 privMen = privilegeManager.getInstance()
 

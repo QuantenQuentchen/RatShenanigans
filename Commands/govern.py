@@ -1,12 +1,12 @@
 import discord
 
-import EmbedGenerator as EmbedGenerator
-from VoteManager import VoteManager
-from privilegeManager import privilegeManager
-from ChannelManager import ChannelManager
-import Views
+import discordBackend.EmbedGenerator as EmbedGenerator
+from VoteSystem.VoteManager import VoteManager
+from discordBackend.privilegeManager import privilegeManager
+from discordBackend.ChannelManager import ChannelManager
+import discordBackend.Views as Views
 from Government.constitutionManager import constitutionManager
-from BotManager import BotManager
+from discordBackend.BotManager import BotManager
 
 govern = BotManager.getBot().create_group("govern", "Government commands")
 
