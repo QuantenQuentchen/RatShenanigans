@@ -46,10 +46,10 @@ class privilegeManager:
         return str[:-1]
 
     def isEveryone(self, memberRoles) -> bool:
-        return not any(role in self.exclude for role in memberRoles)
+        return not any(role.id in self.exclude for role in memberRoles)
 
     def isVorsitz(self, memberRoles) -> bool:
-        return any(role in self.vorsitz or role in self.adminRoles for role in memberRoles) and not any(role in self.exclude for role in memberRoles)
+        return any(role.id in self.vorsitz or role.id in self.adminRoles for role in memberRoles) and not any(role.id in self.exclude for role in memberRoles)
 
     def isMANN(self, memberRoles) -> bool:
-        return any(role in self.MANN or role in self.vorsitz or role in self.adminRoles for role in memberRoles) and not any(role in self.exclude for role in memberRoles)
+        return any(role.id in self.MANN or role.id in self.vorsitz or role.id in self.adminRoles for role in memberRoles) and not any(role.id in self.exclude for role in memberRoles)

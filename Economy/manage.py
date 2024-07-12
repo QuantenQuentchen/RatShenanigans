@@ -64,13 +64,13 @@ async def stockUpdate():
     changeList = stockStuff()
     embeds = await EmbedGenerator.generateStockChangeEmbed(changeList)
     for embed in embeds:
-        await ChannelManager.getInstance().sendOnStockChannel(embed=embed)
+        await ChannelManager.getInstance(776823258385088552).sendOnStockChannel(embed=embed)
 
 async def debuGStockUpdate():
     changeList = stockStuff()
     embeds = await EmbedGenerator.generateStockChangeEmbed(changeList)
     for embed in embeds:
-        await ChannelManager.getInstance().sendOnStockChannel(embed=embed)
+        await ChannelManager.getInstance(776823258385088552).sendOnStockChannel(embed=embed)
 
 def getWertinEUR(money):
     return round((money / 1000 * halbesKilo),2)

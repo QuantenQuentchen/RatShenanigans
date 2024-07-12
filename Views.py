@@ -21,7 +21,7 @@ dbM = dbManager.getInstance()
 MichiID = 546434993690247191
 
 async def sendVote(embed, view):
-    await cm.getInstance().sendOnVoteChannel(message=privMen.mentionMANN,embed=embed, view=view)
+    await cm.getInstance(776823258385088552).sendOnVoteChannel(message=privMen.mentionMANN,embed=embed, view=view)
 
 
 async def startNoAbstainVote(vote, guildID, bot):

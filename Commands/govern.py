@@ -16,11 +16,11 @@ bot = BotManager.getBot()
 
 async def sendConstitution(ctx):
     for i in constitutionManager.getConstitutionManager(ctx.guild.id).getConstitution():
-        await ChannelManager.getChannelManager(ctx.guild.id).sendOnConstitutionChannel(embed=await EmbedGenerator.generateConstitutionEmbed(i["title"], i["paragraphs"]))
+        await ChannelManager.getInstance(ctx.guild.id).sendOnConstitutionChannel(embed=await EmbedGenerator.generateConstitutionEmbed(i["title"], i["paragraphs"]))
     await sendConstitutionDivider(ctx)
 
 async def sendConstitutionDivider(ctx):
-    await ChannelManager.getChannelManager(ctx.guild.id).sendOnConstitutionChannel(embed=await EmbedGenerator.generateDividerEmbed())
+    await ChannelManager.getInstance(ctx.guild.id).sendOnConstitutionChannel(embed=await EmbedGenerator.generateDividerEmbed())
 
 @govern.command(
     name="addlog",
@@ -41,6 +41,8 @@ async def AddLog(ctx,
         description = f"""{description}"""
         await ChannelManager.getInstance(ctx.guild.id).sendOnLogChannel(embed=await EmbedGenerator.generateLogembed(title, description, pro, con, abstain, total, votekind))
         await ctx.respond("Log added", ephemeral=True)
+    else:
+        await ctx.respond("du hast keine Rechte, du Frau", ephemeral=True)
 
 @govern.command(
     name="startvote",
@@ -56,7 +58,7 @@ async def startVote(ctx,
         description = description.replace(r"\\n", "\n")
         description = f"""{description}"""
         voteId = VoteManager.getVoteManager(ctx.guild.id).startVote(title, description, votekind, [0,1])
-        await ChannelManager.getChannelManager(ctx.guild.id).sendOnVoteChannel(embed = await EmbedGenerator.generateVoteEmbed(title, description, votekind), view = Views.VoteView(voteId, bot))
+        await ChannelManager.getInstance(ctx.guild.id).sendOnVoteChannel(embed = await EmbedGenerator.generateVoteEmbed(title, description, votekind), view = Views.VoteView(voteId, bot))
         await ctx.respond("Log added", ephemeral=True)
 
 @govern.command(
