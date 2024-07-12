@@ -1,6 +1,9 @@
 from databaseManager import dbManager
+from privilegeManager import privilegeManager
 from BotManager import BotManager
 import discord
+
+privMen = privilegeManager.getInstance()
 
 bot = BotManager.getBot()
 
@@ -17,7 +20,7 @@ async def addMemory(ctx,
                     answer: discord.Option(str, name="answer", description="The answer to the question", required=True) # type: ignore
                     ):
     print("Checking Memory")
-    if ctx.author.id == MichiID:
+    if privMen.isMemoryGuy(ctx.author):
         dbM.add_memory(ques, answer)
         await ctx.respond(f"Successfully added memory to Michi", ephemeral=True)
     else:

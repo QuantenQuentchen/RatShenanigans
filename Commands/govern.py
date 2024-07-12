@@ -35,7 +35,7 @@ async def AddLog(ctx,
                 con: discord.Option(int, name="con", description="Contra Stimmen", required=True),# type: ignore
                 votekind: discord.Option(int, name="votekind", description="Art der Abstimmung 0 = Simpel, 1 = Qualified", required=True)# type: ignore
                     ):
-    if privMen.isVorsitz(ctx.author.roles):
+    if privMen.isVorsitz(ctx.author):
         total = pro + con + abstain
         description = description.replace(r"\\n", "\n")
         description = f"""{description}"""
@@ -54,7 +54,7 @@ async def startVote(ctx,
                     description: discord.Option(str, name="description", description="Beschreibung", required=True),# type: ignore
                     votekind: discord.Option(int, name="votekind", description="Art der Abstimmung 0 = Simpel, 1 = Qualified", required=True)# type: ignore
                     ):
-    if privMen.isVorsitz(ctx.author.roles):
+    if privMen.isVorsitz(ctx.author):
         description = description.replace(r"\\n", "\n")
         description = f"""{description}"""
         voteId = VoteManager.getVoteManager(ctx.guild.id).startVote(title, description, votekind, [0,1])
@@ -67,6 +67,6 @@ async def startVote(ctx,
     guild_ids=[776823258385088552],
 )
 async def AddConstitution(ctx):
-    if privMen.isVorsitz(ctx.author.roles):
+    if privMen.isVorsitz(ctx.author):
         await sendConstitution()
         await ctx.respond("Constitution added", ephemeral=True)

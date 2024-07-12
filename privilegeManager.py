@@ -18,6 +18,8 @@ class privilegeManager:
         Stellvertreter = 1242232096370462751
         MANN = 1242196287676223538
 
+        self.MemoryGuy = 546434993690247191
+
         self.adminRoles = {oneTrueAdmin}
         self.vorsitz = {Vorsitz, Stellvertreter}
         self.MANN = {MANN}
@@ -26,6 +28,12 @@ class privilegeManager:
 
     def init(self):
         pass
+
+    def __checkUserId__(self, author, ids: set):
+        return author.id in ids
+
+    def __checkUserRoles__(self, author, roles):
+        return any(role.id in roles for role in author.roles)
 
     def mentionMANN(self):
         str = ""
@@ -45,11 +53,17 @@ class privilegeManager:
             str += "<@&" + str(role) + ">,"
         return str[:-1]
 
-    def isEveryone(self, memberRoles) -> bool:
-        return not any(role.id in self.exclude for role in memberRoles)
+    def isEveryone(self, member) -> bool:
+        return not self.__checkUserId__(member, self.exclude)
 
-    def isVorsitz(self, memberRoles) -> bool:
-        return any(role.id in self.vorsitz or role.id in self.adminRoles for role in memberRoles) and not any(role.id in self.exclude for role in memberRoles)
+    def isVorsitz(self, member) -> bool:
+        return self.__checkUserRoles__(member, self.vorsitz) or self.isAdmin(member) and self.isEveryone(member)
 
-    def isMANN(self, memberRoles) -> bool:
-        return any(role.id in self.MANN or role.id in self.vorsitz or role.id in self.adminRoles for role in memberRoles) and not any(role.id in self.exclude for role in memberRoles)
+    def isMANN(self, member) -> bool:
+        return self.__checkUserRoles__(member, self.MANN) or self.isVorsitz(member) and self.isEveryone(member)
+    
+    def isAdmin(self, member) -> bool:
+        return self.__checkUserRoles__(member, self.adminRoles) and self.isEveryone(member)
+
+    def isMemoryGuy(self, member) -> bool:
+        return member.id == self.MemoryGuy
