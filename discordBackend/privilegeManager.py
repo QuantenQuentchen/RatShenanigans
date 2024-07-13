@@ -11,19 +11,27 @@ class privilegeManager:
 
     def __init__(self):
 
+        #Hardcoded Roles
+
+
+        #Excluded user ID, ie. the "owner"
         AHHHH = 704975440963698768
 
+        #Admin Role
         oneTrueAdmin = 1260632825527402606
+        
         Vorsitz = 1242213719795171378
         Stellvertreter = 1242232096370462751
         MANN = 1242196287676223538
 
+        #For that one guy who wants to memorize stuff
         self.MemoryGuy = 546434993690247191
 
+        #Compiled lists from literals
         self.adminRoles = {oneTrueAdmin}
         self.vorsitz = {Vorsitz, Stellvertreter}
         self.MANN = {MANN}
-        self.everyone = set()
+        self.everyone = set() #currently empty as I don't know what constitutes an everyone role, also never actually used except in cascasding role checks, ie. currently no one is everyone also it's never checker wether someone is everyone
         self.exclude = {AHHHH}
 
     def init(self):

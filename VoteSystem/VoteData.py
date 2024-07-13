@@ -1,13 +1,14 @@
 class Vote:
+    #Represents a single Vote, with all the necessary information
     def __init__(self, title, description, voteKind, present: list[int], private: bool = False):
         self.title = title
         self.description = description
         self.voteKind = voteKind
         self.present = present
         self.private = private
-        self.pro = set()
-        self.abstain = set()
-        self.con = set()
+        self.pro = set() #Set of ids of people who voted pro
+        self.abstain = set() #Set of ids of people who abstained
+        self.con = set() #Set of ids of people who voted con
     
     def getPro(self) -> set[int]:
         return self.pro
@@ -60,7 +61,8 @@ class Vote:
         return self.getProNum() == self.getConNum()
 
     def checkInValidity(self):
-        if self.getPresentNum() >= 5:#self.getProNum() + self.getConNum() + self.getAbstainNum() == self.getPresentNum() and self.getPresentNum() >= 5:
+        #commented out for yk not yet implemented reasons (and consti. unclear on exact vote rights for council members)
+        if self.getPresentNum() >= 5:#self.getProNum() + self.getConNum() + self.getAbstainNum() == self.getPresentNum() and self.getPresentNum() >= 5: 
             return False
         return True
 

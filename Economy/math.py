@@ -9,29 +9,35 @@ wertvon1kEUR = halbesKilo
 
 chanceArr = []
 
+#Generates a list of chances for gambling to have at least somewhat uniform odds
 for i in range(70):
-    chanceArr.append(-1)
+    chanceArr.append(-1) #Fail
 
 for i in range(25):
-    chanceArr.append(0)
+    chanceArr.append(0) #Break even
 
 for i in range(4):
-    chanceArr.append([1.1, 3.0])
+    chanceArr.append([1.1, 3.0]) #Generate random multiplier between these values
 
-chanceArr.append(4)
+chanceArr.append(4) #4x Win
 
 
 def random_bool(true_percentage):
+    #Returns true with a certain percentage
     return random.random() < true_percentage / 100.0
 
 def genStockChance():
+    #generates random float
     return random.uniform(-0.9, 3.0)
 
 def round_up(value, digits):
+    #roundup helper function sometimes used somethines not
     scale = 10 ** digits
     return math.ceil(value * scale) / scale
 
 def getChance():
+    #Btw ich sollte docstrings schreiben aber ahhhh neeee
+    #Chance for Gambling
     choice = random.choice(chanceArr)
     if type(choice) == int:
         return choice

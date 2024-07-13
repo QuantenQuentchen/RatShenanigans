@@ -5,16 +5,20 @@ class dbManager():
 
     instance = None
     
+    #Nooow this is important as it interacts with the persitant DB, it uses SQL, which is technically another Lamguage so ig learning it is a good idea
+
     def getInstance():
         if dbManager.instance is None:
             dbManager.instance = dbManager()
         return dbManager.instance
 
     def __init__(self):
+        #defines the connection to the db (currently the file democracy.db in the data subfolder)
         self.connection = sqlite3.connect("data/democracy.db")
         self.cur = self.connection.cursor()
         self.create_tables_if_not_exist()
 
+    #creates the tables if they do not exist, this is important as the tables are the structure of the db
     def create_tables_if_not_exist(self):
         self.cur.execute("""
             CREATE TABLE IF NOT EXISTS constitution (
@@ -105,6 +109,7 @@ class dbManager():
             );
         """)
 
+        #Memory stuff
         self.cur.execute("""
             CREATE TABLE IF NOT EXISTS memory (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -128,11 +133,13 @@ class dbManager():
         return result
     
     def drop_articles(self):
+        #Debug do not call, operates on hot db
         self.cur.execute("DELETE FROM constitution")
         self.cur.execute("DELETE FROM paragraphs")
         self.connection.commit()
 
     def fix_all_articleIDs(self):
+        #debug do not call, operates on hot db
         for article in self.get_all_articleIDs():
             self.cur.execute("SELECT title FROM constitution WHERE number = ?", (article[0],))
             oldTitle = self.cur.fetchone()[0]
@@ -184,6 +191,7 @@ class dbManager():
         self.connection.commit()
 
     def drop_tables(self):
+        #Debug do not call, drops all tables, Never use, will delete all data
         self.cur.execute("DROP TABLE IF EXISTS users")
         self.cur.execute("DROP TABLE IF EXISTS companies")
         self.cur.execute("DROP TABLE IF EXISTS user_stocks")

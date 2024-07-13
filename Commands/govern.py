@@ -8,6 +8,7 @@ import discordBackend.Views as Views
 from Government.constitutionManager import constitutionManager
 from discordBackend.BotManager import BotManager
 
+#Creates command group
 govern = BotManager.getBot().create_group("govern", "Government commands")
 
 privMen = privilegeManager.getInstance()
@@ -22,13 +23,14 @@ async def sendConstitution(ctx):
 async def sendConstitutionDivider(ctx):
     await ChannelManager.getInstance(ctx.guild.id).sendOnConstitutionChannel(embed=await EmbedGenerator.generateDividerEmbed())
 
+#sets this at command for the group
 @govern.command(
     name="addlog",
     description="Add a log to the log channel",
     guild_ids=[776823258385088552],
 )
 async def AddLog(ctx,
-                title: discord.Option(str, name="title", description="Titel", required=True),# type: ignore
+                title: discord.Option(str, name="title", description="Titel", required=True),# type: ignore (ignore to ignore erronious pylance type error) defines the inputs for the slash command
                 description: discord.Option(str, name="description", description="Beschreibung", required=True),# type: ignore
                 pro: discord.Option(int, name="pro", description="Pro Stimmen", required=True),# type: ignore
                 abstain: discord.Option(int, name="abstain", description="Enthaltungen", required=True),# type: ignore

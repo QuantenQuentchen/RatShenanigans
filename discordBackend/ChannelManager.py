@@ -9,6 +9,7 @@ class ChannelManager():
         return ChannelManager.ChannelManagers[guildID]
     
     def __init__(self, guildID ):
+        #Hardcoded Channels
         self.StockChannel = 802655885008437268
         self.VoteChannel = 1260247977075671050
         self.LogChannel = 1242236502486810657
@@ -20,6 +21,7 @@ class ChannelManager():
     
 
     async def sendOnStockChannel(self, message=None, embed=None, view=None):
+        #used to send a message defined by message, embed and views to specified Channel
         channel = self.bot.get_channel(self.StockChannel)
         await channel.send(message, embed=embed, view=view)
     
