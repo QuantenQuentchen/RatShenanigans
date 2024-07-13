@@ -43,7 +43,7 @@ def applyStockChance(company_id):
     chance = math.genStockChance()
     if chance:
         val = dbM.get_company_value(company_id)
-        new_val = val (val * chance)
+        new_val = val + (val * chance)
         dbM.set_company_value(company_id, new_val)
 
     if math.random_bool(0.01):

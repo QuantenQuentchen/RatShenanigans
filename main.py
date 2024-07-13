@@ -41,5 +41,6 @@ import Commands.MichiMemory
 from Routines import memory
 
 import Events.onReady
+import Events.onMessage
 
 bot.run(Token)

@@ -4,11 +4,13 @@ from discord import Option, Member, SlashCommandGroup
 from Backend.databaseManager import dbManager
 from discordBackend.privilegeManager import privilegeManager
 from discordBackend.BotManager import BotManager
+from volatileStateHandler import VolatileStateHandler
 
 debug = BotManager.getBot().create_group("debug", "Finger WECH!")
 
 dbM = dbManager.getInstance()
 privMen = privilegeManager.getInstance()
+volStateHan = VolatileStateHandler.getInstance()
 
 @debug.command(
     name="fixstocks",
@@ -130,5 +132,19 @@ async def removeCompany(ctx,
     if privMen.isVorsitz(ctx.author):
         dbM.remove_company(company_id)
         await ctx.respond(f"Company {company_id} removed", ephemeral=True)
+    else:
+        await ctx.respond("You are not allowed to use this command", ephemeral=True)
+
+@debug.command(
+    name="peggingmode",
+    description="[Debug] Michi mags",
+    guild_ids=[776823258385088552],
+)
+async def peggingMode(ctx,
+                    mode: Option(bool, name="mode", description="The mode you want to set", required=True) # type: ignore
+    ):
+    if privMen.isAdmin(ctx.author):
+        volStateHan.setFunny(mode)
+        await ctx.respond(f"Pegging mode set to {mode}", ephemeral=True)
     else:
         await ctx.respond("You are not allowed to use this command", ephemeral=True)
