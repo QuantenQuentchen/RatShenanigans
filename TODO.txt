@@ -1,4 +1,4 @@
-Commands (easy to add):
+Commands (easy):
     -Buy Stocks (Use discord.Autocomplete, for Option) (Could be done via View but due to DC Limits would be better to have a command)
     -Sell Stocks (Use discord.Autocomplete, for Option) (Could be done via View but due to DC Limits would be better to have a command)
     -List My Stocks (I just thought about it, add a bought at field (maybe would be good UI but not necessary))
@@ -18,4 +18,6 @@ To do (mid):
 To do (hard):
     -Agnostecize the bot (Make it so that it can be used by multiple servers)
     -Add emergecy Commands for everyone (or just Admins hehe) (auch eigentlich sack einfach aber brauch nen wenig Docs lesen)
+
+To do (impossible):
     -Prey weiter spielen
