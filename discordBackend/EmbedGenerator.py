@@ -107,7 +107,7 @@ async def generateLogEmbedPublic(vote: Vote):
 
     return embed
 
-async def generateMemoryQuestionEmbed(question):
+async def generateMemoryQuestionEmbed(question: str):
     embed = Embed(title=question, description="", color=0x1d05fa, type="rich", timestamp=datetime.datetime.now())
     embed.set_author(name="Jura Bot", icon_url=JuraBotIcon)
     return embed
@@ -115,13 +115,13 @@ async def generateMemoryQuestionEmbed(question):
 async def generateMemoryAnswerEmbed(question, answer):
     embed = Embed(title=question, description=answer, color=0x1d05fa, type="rich", timestamp=datetime.datetime.now())
     embed.set_author(name="Jura Bot", icon_url=JuraBotIcon)
-    embed.set_thumbnail(url=HappyEGirl)
+    embed.set_image(url=HappyEGirl)
     return embed
 
 async def generateMemoryTimeoutEmbed():
     embed = Embed(title="Timeout", description="Du hast zu lange gebraucht, du fucking Looser, und du bist black", color=0x1d05fa, type="rich", timestamp=datetime.datetime.now())
     embed.set_author(name="Jura Bot", icon_url=JuraBotIcon)
-    embed.set_thumbnail(url=BadEgirl)
+    embed.set_image(url=BadEgirl)
     return embed
 
 async def generateDividerEmbed():

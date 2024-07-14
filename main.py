@@ -19,8 +19,11 @@ privMen = privilegeManager.getInstance()
 dbM = dbManager.getInstance()
 load_dotenv()
 
+intents = discord.Intents.default()  # Get the default intents
+intents.members = True  # Enable the members intent
+
 #Create the bot instance
-bot = commands.Bot("DEMOCRACY!", intents=discord.Intents.default())
+bot = commands.Bot("DEMOCRACY!", intents=intents)
 
 #Get the token from the environment
 Token = os.getenv("DISCORD_BOT_TOKEN")

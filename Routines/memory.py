@@ -1,4 +1,5 @@
 from discord.ext import tasks
+import discord
 from discordBackend.BotManager import BotManager
 import datetime
 import random
@@ -15,9 +16,17 @@ dbM = dbManager.getInstance()
 @tasks.loop(minutes=3)
 async def randoPush():
     if random_bool(13.25):
-
+        bot = BotManager.getBot()
+        gl = bot.get_guild(776823258385088552)
+        bro = gl.get_member(546434993690247191)
+        if bro.status == discord.Status.offline or bro.status == discord.Status.idle or type(bro.status) == str:
+            return
         Mid = dbM.get_random_memory()
+        Mid = Mid[0]
         if Mid == None:
             return
-        chan = await bot.get_channel(random.choice(randooo))
-        await chan.send("<@&546434993690247191>", embed=await EmbedGenerator.generateMemoryQuestionEmbed(dbM.get_question(Mid)), view=Views.MemoryView(bot,Mid))
+        print(Mid)
+        chan = bot.get_channel(random.choice(randooo))
+        ques = dbM.get_question(Mid)
+        print(ques)
+        await chan.send("<@546434993690247191>", embed=await EmbedGenerator.generateMemoryQuestionEmbed(ques), view=Views.MemoryView(bot,Mid))

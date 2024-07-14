@@ -97,14 +97,17 @@ class MemoryView(discord.ui.View):
 
     
     async def on_timeout(self):
-        await self.message.edit(embed= await EmbedGenerator.generateMemoryTimeoutEmbed(),view=None)
-        print("Timeout Memory")
+        if not self.wasClicked:
+            await self.message.edit(embed= await EmbedGenerator.generateMemoryTimeoutEmbed(), view=None)
+            print("Timeout Memory")
+        else:
+            print("Timeout Memory after click")
 
     @discord.ui.button(label="Answer", style=discord.ButtonStyle.green)
     async def answer(self, button: discord.ui.Button, interaction: discord.Interaction):
         if(privMen.isMemoryGuy(interaction.user) and not self.wasClicked):
             self.wasClicked = True
-            await self.message.edit(embed=await EmbedGenerator.generateMemoryAnswerEmbed(dbM.get_question, dbM.get_answer), view=None)
+            await self.message.edit(embed=await EmbedGenerator.generateMemoryAnswerEmbed(dbM.get_question(self.memoryId), dbM.get_answer(self.memoryId)), view=None)
             await interaction.response.send_message("Nice", ephemeral=True)
     
     @discord.ui.button(label="Skip", style=discord.ButtonStyle.grey)

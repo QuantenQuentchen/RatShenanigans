@@ -166,16 +166,18 @@ class dbManager():
         return {"num": article_number, "title": title, "paragraphs": para}
 
     def add_memory(self, question, answer):
+        print(question, answer)
         self.cur.execute("INSERT INTO memory (question, answer) VALUES (?, ?)", (question, answer))
         self.connection.commit()
+    
     def get_question(self, question):
-        self.cur.execute("SELECT answer FROM memory WHERE question = ?", (question,))
+        self.cur.execute("SELECT question FROM memory WHERE id = ?", (question,))
         result = self.cur.fetchone()
 
         return result[0] if result else None
     
     def get_answer(self, answer):
-        self.cur.execute("SELECT question FROM memory WHERE answer = ?", (answer,))
+        self.cur.execute("SELECT answer FROM memory WHERE id = ?", (answer,))
         result = self.cur.fetchone()
 
         return result[0] if result else None
