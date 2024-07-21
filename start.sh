@@ -1,8 +1,10 @@
 #!/bin/bash
 
 
-SCRIPT_DIR=$(cd $(dirname $0))
+SCRIPT_DIR=$(dirname "$0")
 
 git pull
+
+echo "$SCRIPT_DIR"
 
 python3.11 $SCRIPT_DIR/main.py
