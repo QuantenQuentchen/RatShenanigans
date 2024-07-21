@@ -29,6 +29,8 @@ class privilegeManager:
 
         self.Furry = 315880867597910018
 
+        self.Schewaun = 715629325654949998
+
         #Compiled lists from literals
         self.adminRoles = {oneTrueAdmin}
         self.vorsitz = {Vorsitz, Stellvertreter}
@@ -80,3 +82,6 @@ class privilegeManager:
     
     def isFurry(self, member) -> bool:
         return member.id == self.Furry
+    
+    def isSchewaun(self, member) -> bool:
+        return member.id == self.Schewaun
