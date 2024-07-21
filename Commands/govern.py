@@ -8,6 +8,7 @@ import discordBackend.Views as Views
 from Government.constitutionManager import constitutionManager
 from discordBackend.BotManager import BotManager
 from volatileStateHandler import VolatileStateHandler
+from Backend.prefManager import PrefManager
 
 #Creates command group
 govern = BotManager.getBot().create_group("govern", "Government commands")
@@ -75,7 +76,7 @@ async def AddConstitution(ctx):
         await ctx.respond("Constitution added", ephemeral=True)
 
 @govern.command(
-    name="setStockUpdate",
+    name="setstockupdate",
     description="Set the stock update state",
     guild_ids=[776823258385088552],
 )
@@ -85,3 +86,59 @@ async def setStockUpdate(ctx,
         if privMen.isVorsitz(ctx.author):
             VolatileStateHandler.getInstance().setDoMarket(state)
             await ctx.respond("Stock Update state set", ephemeral=True)
+
+@govern.command(
+    name="setstockchannel",
+    description="Set the stock channel",
+    guild_ids=[776823258385088552],
+)
+async def setStockChannel(ctx,
+                        channel: discord.Option(discord.abc.GuildChannel, name="channel", description="Channel", required=True) # type: ignore
+                        ):
+        if privMen.isVorsitz(ctx.author):
+            PrefManager.getInstance().set_channel(PrefManager.kind.Stock, ctx.guild.id, channel.id)
+            await ctx.respond("Stock Channel set", ephemeral=True)
+        else:
+            await ctx.respond("Nah you don't", ephemeral=True)
+
+@govern.command(
+    name="setvotechannel",
+    description="Set the vote channel",
+    guild_ids=[776823258385088552],
+)
+async def setVoteChannel(ctx,
+                        channel: discord.Option(discord.abc.GuildChannel, name="channel", description="Channel", required=True) # type: ignore
+                        ):
+        if privMen.isVorsitz(ctx.author):
+            PrefManager.getInstance().set_channel(PrefManager.kind.Vote, ctx.guild.id, channel.id)
+            await ctx.respond("Vote Channel set", ephemeral=True)
+        else:
+            await ctx.respond("Nah you don't", ephemeral=True)
+
+@govern.command(
+    name="setlogchannel",
+    description="Set the log channel",
+    guild_ids=[776823258385088552],
+)
+async def setLogChannel(ctx,
+                        channel: discord.Option(discord.abc.GuildChannel, name="channel", description="Channel", required=True) # type: ignore
+                        ):
+        if privMen.isVorsitz(ctx.author):
+            PrefManager.getInstance().set_channel(PrefManager.kind.Log, ctx.guild.id, channel.id)
+            await ctx.respond("Log Channel set", ephemeral=True)
+        else:
+            await ctx.respond("Nah you don't", ephemeral=True)
+
+@govern.command(
+    name="setconstitutionchannel",
+    description="Set the constitution channel",
+    guild_ids=[776823258385088552],
+)
+async def setConstitutionChannel(ctx,
+                        channel: discord.Option(discord.abc.GuildChannel, name="channel", description="Channel", required=True) # type: ignore
+                        ):
+        if privMen.isVorsitz(ctx.author):
+            PrefManager.getInstance().set_channel(PrefManager.kind.Constitution, ctx.guild.id, channel.id)
+            await ctx.respond("Constitution Channel set", ephemeral=True)
+        else:
+            await ctx.respond("Nah you don't", ephemeral=True)

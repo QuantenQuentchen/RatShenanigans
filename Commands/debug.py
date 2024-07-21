@@ -33,7 +33,7 @@ async def fixdit(ctx):
 )
 async def updateStock(ctx):
     if privMen.isVorsitz(ctx.author):
-        await dbM.debuGStockUpdate()
+        await dbM.debugStockUpdate()
     else:
         await ctx.respond("You are not allowed to use this command", ephemeral=True)
 

@@ -14,7 +14,6 @@ privMen = privilegeManager.getInstance()
 #logging.basicConfig(level=logging.INFO)  # Set the base logging level to INFO
 #logger = logging.getLogger('discord')  # Get the logger for the 'discord' library
 #logger.setLevel(logging.DEBUG) 
-
 #Get's the database manager singelton instance
 dbM = dbManager.getInstance()
 load_dotenv()
