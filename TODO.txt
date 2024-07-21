@@ -14,6 +14,7 @@ Never tested:
 To do (mid):
     -Use existing DBs for Constitution modifications
     -Add Qualified vote for Constitution modifications (Would need to add a DB to track pending changes (no wait have that already))
+    -Config Saves (new table or new DB)
 
 To do (hard):
     -Agnostecize the bot (Make it so that it can be used by multiple servers)
