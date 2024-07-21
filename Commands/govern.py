@@ -83,5 +83,5 @@ async def setStockUpdate(ctx,
                         state: discord.Option(bool, name="state", description="State", required=True) # type: ignore
                         ):
         if privMen.isVorsitz(ctx.author):
-            VolatileStateHandler.getInstance().setStockUpdate(state)
+            VolatileStateHandler.getInstance().setDoMarket(state)
             await ctx.respond("Stock Update state set", ephemeral=True)
