@@ -7,6 +7,7 @@ from discordBackend.ChannelManager import ChannelManager
 import discordBackend.Views as Views
 from Government.constitutionManager import constitutionManager
 from discordBackend.BotManager import BotManager
+from volatileStateHandler import VolatileStateHandler
 
 #Creates command group
 govern = BotManager.getBot().create_group("govern", "Government commands")
@@ -72,3 +73,15 @@ async def AddConstitution(ctx):
     if privMen.isVorsitz(ctx.author):
         await sendConstitution()
         await ctx.respond("Constitution added", ephemeral=True)
+
+@govern.command(
+    name="setStockUpdate",
+    description="Set the stock update state",
+    guild_ids=[776823258385088552],
+)
+async def setStockUpdate(ctx,
+                        state: discord.Option(bool, name="state", description="State", required=True) # type: ignore
+                        ):
+        if privMen.isVorsitz(ctx.author):
+            VolatileStateHandler.getInstance().setStockUpdate(state)
+            await ctx.respond("Stock Update state set", ephemeral=True)

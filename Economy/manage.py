@@ -7,6 +7,7 @@ from discordBackend.ChannelManager import ChannelManager
 import discordBackend.EmbedGenerator as EmbedGenerator
 import Economy.math as math
 from discordBackend.BotManager import BotManager
+from volatileStateHandler import VolatileStateHandler
 
 dbM = dbManager.getInstance()
 
@@ -68,6 +69,8 @@ def stockStuff():
 async def stockUpdate():
     #following checks if the current minute is 0, if not the function returns, i.e that it runs only on the full hour
     now = datetime.datetime.now()
+    if VolatileStateHandler.getInstance().getStockUpdate():
+        return
     if now.minute != 0:
         return
     changeList = stockStuff()

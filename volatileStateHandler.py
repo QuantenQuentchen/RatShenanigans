@@ -13,6 +13,7 @@ class VolatileStateHandler():
         self.funny = False
         self.furry = False
         self.donAsk = False
+        self.doMarket = True
 
     def setFurry(self, state):
         self.furry = state
@@ -31,3 +32,9 @@ class VolatileStateHandler():
 
     def getDonAsk(self):
         return self.donAsk
+    
+    def setDoMarket(self, state):
+        self.doMarket = state
+    
+    def getDoMarket(self):
+        return self.doMarket
