@@ -27,6 +27,8 @@ class privilegeManager:
         #For that one guy who wants to memorize stuff
         self.MemoryGuy = 546434993690247191
 
+        self.Furry = 315880867597910018
+
         #Compiled lists from literals
         self.adminRoles = {oneTrueAdmin}
         self.vorsitz = {Vorsitz, Stellvertreter}
@@ -75,3 +77,6 @@ class privilegeManager:
 
     def isMemoryGuy(self, member) -> bool:
         return member.id == self.MemoryGuy
+    
+    def isFurry(self, member) -> bool:
+        return member.id == self.Furry

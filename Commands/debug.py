@@ -148,3 +148,17 @@ async def peggingMode(ctx,
         await ctx.respond(f"Pegging mode set to {mode}", ephemeral=True)
     else:
         await ctx.respond("You are not allowed to use this command", ephemeral=True)
+
+@debug.command(
+    name="furrymode",
+    description="[Debug] Däniel mags",
+    guild_ids=[776823258385088552],
+)
+async def furryMode(ctx,
+                    mode: Option(bool, name="mode", description="The mode you want to set", required=True) # type: ignore
+    ):
+    if privMen.isAdmin(ctx.author):
+        volStateHan.setFurry(mode)
+        await ctx.respond(f"Furry mode set to {mode}", ephemeral=True)
+    else:
+        await ctx.respond("You are not allowed to use this command", ephemeral=True)
