@@ -190,6 +190,7 @@ async def generateStockChangeEmbed(stocks):
     if currEmbed.fields:  # Check if there are any fields added to the last embed
         retList.append(currEmbed)
     return retList
+#d
 
 def getGerneriCompanyOverviewEmbed():
     embed = Embed(title="Cringe Club", description="Markt Stuff", color=0x1d05fa, type="rich", timestamp=datetime.datetime.now())
