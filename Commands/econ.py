@@ -81,3 +81,36 @@ async def wert(ctx):
     mone = getWertinEUR(dbM.get_user_balance(ctx.author.id))
 
     await ctx.respond(f"Du besitzt Moneten im Wert von {mone}€", ephemeral=True)
+
+async def getcompanyNames(ctx: discord.AutocompleteContext):
+    companyNames= []
+    for company in dbM.get_all_companies():
+        companyNames.append(dbM.get_company_name(company[0])[0])
+    return companyNames
+
+@econ.command(
+    name="buystock",
+    description="Buy your stocks, engage in unprotected Capitalism",
+    guild_ids=[776823258385088552],
+)
+async def buystocks(ctx,
+                    companyName: discord.Option(str, autocomplete= discord.utils.basic_autocomplete(getcompanyNames)),
+                    number: discord.Option(int),
+                    ):
+    companyID= dbM.get_company_id(companyName)
+    value= dbM.get_company_value(companyID)
+    if get_balance(ctx.author.id)< value*number:
+        await ctx.respond("DU BIST GERINGVERDIENER, DU KANNST DIR NICHT MAL DAS KACKEN LEISTEN")
+        return  
+    dbM.add_stocks_to_user(ctx.author.id, companyID, number)
+    await ctx.respond("DU BIST NUN TEIL DES KAPITALISTISCHEN SYSTEMS. HERZLICHEN GLÜCKWUNSCH!")
+    return
+
+@econ.command(
+    name="liststocks",
+    description="Hier eine anzahl an Kaufoptionen",
+    guild_ids=[776823258385088552]
+)
+async def liststocks(ctx):
+    broke= dbM.get_all_user_stocks(ctx.author.id)
+    await ctx.respond(broke)

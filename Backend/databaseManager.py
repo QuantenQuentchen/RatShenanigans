@@ -307,3 +307,6 @@ class dbManager():
     def remove_company(self, company_id):
         self.cur.execute("DELETE FROM companies WHERE company_id = ?", (company_id,))
         self.connection.commit()
+    def get_company_id(self, company_name):
+        self.cur.execute("SELECT company_id FROM companies WHERE name= ?", (company_name))
+        return self.cur.fetchone()[0]
