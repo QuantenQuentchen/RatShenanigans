@@ -94,8 +94,8 @@ async def getcompanyNames(ctx: discord.AutocompleteContext):
     guild_ids=[776823258385088552],
 )
 async def buystocks(ctx,
-                    companyname: discord.Option(str, autocomplete= discord.utils.basic_autocomplete(getcompanyNames)),
-                    number: discord.Option(int),
+                    companyname: discord.Option(str, autocomplete= discord.utils.basic_autocomplete(getcompanyNames)), # type: ignore
+                    number: discord.Option(int), # type: ignore
                     ):
     companyID= dbM.get_company_id(companyname)
     value= dbM.get_company_value(companyID)
@@ -113,4 +113,7 @@ async def buystocks(ctx,
 )
 async def liststocks(ctx):
     broke= dbM.get_all_user_stocks(ctx.author.id)
-    await ctx.respond(broke)
+    diesdas = []
+    for stock in broke:
+        diesdas.append({"name": dbM.get_company_name(stock[0]), "num": stock[1], "price": round(dbM.get_company_value(stock[0]),2)})
+    await ctx.respond(embed=await EmbedGenerator.generateCompanyUserOverviewEmbed(diesdas), ephemeral=True)
