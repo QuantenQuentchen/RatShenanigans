@@ -94,10 +94,10 @@ async def getcompanyNames(ctx: discord.AutocompleteContext):
     guild_ids=[776823258385088552],
 )
 async def buystocks(ctx,
-                    companyName: discord.Option(str, autocomplete= discord.utils.basic_autocomplete(getcompanyNames)),
+                    companyname: discord.Option(str, autocomplete= discord.utils.basic_autocomplete(getcompanyNames)),
                     number: discord.Option(int),
                     ):
-    companyID= dbM.get_company_id(companyName)
+    companyID= dbM.get_company_id(companyname)
     value= dbM.get_company_value(companyID)
     if get_balance(ctx.author.id)< value*number:
         await ctx.respond("DU BIST GERINGVERDIENER, DU KANNST DIR NICHT MAL DAS KACKEN LEISTEN")
