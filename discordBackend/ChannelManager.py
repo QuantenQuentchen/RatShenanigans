@@ -45,4 +45,3 @@ class ChannelManager():
         self.ConstitutionChannel = self.prefMan.get_channel(PrefManager.kind.Constitution, self.guildID)
         channel = self.bot.get_channel(self.ConstitutionChannel)
         await channel.send(message, embed=embed, view=view)
-    
