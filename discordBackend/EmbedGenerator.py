@@ -212,7 +212,7 @@ async def generateCompanyUserOverviewEmbed(companies):
     retList = []
     currEmbed = getGerneriCompanyOverviewEmbed()
     for idx, company in enumerate(companies, start=1):  # Start counting from 1
-        currEmbed.add_field(name=f"**{company['name'].upper()}**: {company['price']}M x {company['num']} = {company['price']*company["num"]}", value="", inline=False)
+        currEmbed.add_field(name=f"**{company['name'].upper()}**: {company['price']}M x {company['num']} = {company['price']*company['num']}M", value="", inline=False)
         if idx % 25 == 0:
             retList.append(currEmbed)
             currEmbed = getGerneriCompanyOverviewEmbed()

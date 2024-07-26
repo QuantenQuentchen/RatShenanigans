@@ -83,9 +83,10 @@ async def wert(ctx):
     await ctx.respond(f"Du besitzt Moneten im Wert von {mone}€", ephemeral=True)
 
 async def getcompanyNames(ctx: discord.AutocompleteContext):
+    print("getcompanyNames")
     companyNames= []
     for company in dbM.get_all_companies():
-        companyNames.append(dbM.get_company_name(company[0])[0])
+        companyNames.append(dbM.get_company_name(company[0]))
     return companyNames
 
 @econ.command(
@@ -99,6 +100,11 @@ async def buystocks(ctx,
                     ):
     companyID= dbM.get_company_id(companyname)
     value= dbM.get_company_value(companyID)
+
+    if number<=0:
+        await ctx.respond("DU KANNST NICHT NEGATIVE AKTIEN KAUFEN DU IDIOT")
+        return
+
     if get_balance(ctx.author.id)< value*number:
         await ctx.respond("DU BIST GERINGVERDIENER, DU KANNST DIR NICHT MAL DAS KACKEN LEISTEN")
         return  
@@ -117,4 +123,35 @@ async def liststocks(ctx):
     diesdas = []
     for stock in broke:
         diesdas.append({"name": dbM.get_company_name(stock[0]), "num": stock[1], "price": round(dbM.get_company_value(stock[0]),2)})
-    await ctx.respond(embed=await EmbedGenerator.generateCompanyUserOverviewEmbed(diesdas), ephemeral=True)
+    print(diesdas)
+    embeds = await EmbedGenerator.generateCompanyUserOverviewEmbed(diesdas)
+    for emb in embeds:
+        await ctx.respond(embed=emb, ephemeral=True)
+
+
+@econ.command(
+    name="sellstock",
+    description="Buy your stocks, engage in unprotected Capitalism",
+    guild_ids=[776823258385088552],
+)
+async def sellstocks(ctx,
+                    companyname: discord.Option(str, autocomplete= discord.utils.basic_autocomplete(getcompanyNames)), # type: ignore
+                    number: discord.Option(int), # type: ignore
+                    ):
+    companyID= dbM.get_company_id(companyname)
+    value= dbM.get_company_value(companyID)
+    if number<=0:
+        await ctx.respond("DU KANNST NICHT NEGATIVE AKTIEN VERKAUFEN DU IDIOT")
+        return
+    
+    if dbM.get_user_stocks(ctx.author.id, companyID)==0:
+        await ctx.respond("DU HAST KEINE AKTIEN DU ARMES SCHWEIN")
+        return
+
+    if dbM.get_user_stocks(ctx.author.id, companyID)< number:
+        await ctx.respond("DU HAST NICHT GENUG AKTIEN DU ARMES SCHWEIN")
+        return
+    dbM.remove_stocks_from_user(ctx.author.id, companyID, number)
+    add_balance(ctx.author.id, value*number)
+    await ctx.respond("DU HAST DEINE SEELE VERKAUFT. GUT GEMACHT!")
+    return
