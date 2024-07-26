@@ -27,8 +27,10 @@ def random_bool(true_percentage):
     return random.random() < true_percentage / 100.0
 
 def genStockChance():
+    mu = 0
+    sigma = -.1
+    return random.gauss(mu, sigma) 
     #generates random float
-    return random.uniform(-0.9, 3.0)
 
 def round_up(value, digits):
     #roundup helper function sometimes used somethines not

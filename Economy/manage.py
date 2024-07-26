@@ -42,14 +42,14 @@ def transfer_balance(sender_id, receiver_id, amount):
 
 def applyStockChance(company_id):
     chance = math.genStockChance()
-    if chance:
+    if math.random_bool(0.01):
+        chance = -1
+        dbM.set_company_value(company_id, 0)
+    else:
         val = dbM.get_company_value(company_id)
         new_val = val + (val * chance)
         dbM.set_company_value(company_id, new_val)
 
-    if math.random_bool(0.01):
-        chance = -1
-        return dbM.set_company_value(company_id, 0)
     return (chance, new_val)
 
 
