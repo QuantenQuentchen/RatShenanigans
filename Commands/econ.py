@@ -103,6 +103,7 @@ async def buystocks(ctx,
         await ctx.respond("DU BIST GERINGVERDIENER, DU KANNST DIR NICHT MAL DAS KACKEN LEISTEN")
         return  
     dbM.add_stocks_to_user(ctx.author.id, companyID, number)
+    remove_balance(ctx.author.id, value*number)
     await ctx.respond("DU BIST NUN TEIL DES KAPITALISTISCHEN SYSTEMS. HERZLICHEN GLÜCKWUNSCH!")
     return
 
