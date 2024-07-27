@@ -14,4 +14,4 @@ async def on_message(message):
     if privMen.isFurry(message.author) and volStateHan.getFurry():
         await message.reply(r"https://tenor.com/view/furry-tf2-stfu-sussy-gif-21878916")
     if privMen.isSchewaun(message.author) and volStateHan.getDonAsk():
-        await message.reply(r"https://tenor.com/view/who-asked-me-trying-to-find-who-asked-spongebob-spunch-bob-gif-22526294")
+        await message.reply(r"https://tenor.com/view/speech-bubble-gif-27609617")

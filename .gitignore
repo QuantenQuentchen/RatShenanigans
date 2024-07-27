@@ -2,3 +2,4 @@
 RatStuff.code-workspace
 .venv/
 __pycache__/
+data/democracy.db
