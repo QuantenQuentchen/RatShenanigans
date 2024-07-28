@@ -1,6 +1,8 @@
 from discordBackend.privilegeManager import privilegeManager
 from discordBackend.BotManager import BotManager
 from volatileStateHandler import VolatileStateHandler
+import random
+from data.staticKevinData import KevinArray
 
 bot = BotManager.getBot()
 privMen = privilegeManager.getInstance()
@@ -15,3 +17,5 @@ async def on_message(message):
         await message.reply(r"https://tenor.com/view/furry-tf2-stfu-sussy-gif-21878916")
     if privMen.isSchewaun(message.author) and volStateHan.getDonAsk():
         await message.reply(r"https://tenor.com/view/speech-bubble-gif-27609617")
+    if privMen.isKevin(message.author) and volStateHan.getKevin():
+        await message.reply(random.choice(KevinArray))
