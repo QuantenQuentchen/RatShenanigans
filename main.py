@@ -34,6 +34,7 @@ BotManager.setBot(bot)
 #Loads subcommands
 #Commands are added via function decorators
 #All Discord interaction needs to be async as the library is async i.e async def and await
+import Commands.hatecrime
 import Commands.econ
 import Commands.rat
 import Commands.govern
