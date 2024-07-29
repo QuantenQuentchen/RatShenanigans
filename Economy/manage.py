@@ -45,6 +45,7 @@ def applyStockChance(company_id):
     if math.random_bool(0.01):
         chance = -1
         dbM.set_company_value(company_id, 0)
+        new_val = 0
     else:
         val = dbM.get_company_value(company_id)
         new_val = val + (val * chance)
@@ -60,7 +61,7 @@ def stockStuff():
     for company in companies:
         old = dbM.get_company_value(company[0])
         stuff = applyStockChance(company[0])
-        changeList.append({"name": dbM.get_company_name(company[0]), "change": round(stuff[0]*100, 2), "new": round(stuff[1], 2), "old": round(old, 2)})
+        changeList.append({"name": dbM.get_company_name(company[0]), "change": stuff[0]*100, "new": stuff[1], "old": old})
     return changeList
 
 

@@ -1,7 +1,7 @@
 Commands (easy):
-    -Buy Stocks (Use discord.Autocomplete, for Option) (Could be done via View but due to DC Limits would be better to have a command)
-    -Sell Stocks (Use discord.Autocomplete, for Option) (Could be done via View but due to DC Limits would be better to have a command)
-    -List My Stocks (I just thought about it, add a bought at field (maybe would be good UI but not necessary))
+    -Buy Stocks (Use discord.Autocomplete, for Option) (Could be done via View but due to DC Limits would be better to have a command) (Did that)
+    -Sell Stocks (Use discord.Autocomplete, for Option) (Could be done via View but due to DC Limits would be better to have a command) (Did that)
+    -List My Stocks (I just thought about it, add a bought at field (maybe would be good UI but not necessary)) (Did that)
     -Found Company (Stocks value will always be /100.000 of input Value input Value > 100.000, and Name etc.)
     -(Uhhhh technically you should add a Max amount of Stocks per Company and (which can be increased and the Stocks would be defined by (requires:
         -Prod DB Modification
@@ -14,7 +14,7 @@ Never tested:
 To do (mid):
     -Use existing DBs for Constitution modifications
     -Add Qualified vote for Constitution modifications (Would need to add a DB to track pending changes (no wait have that already))
-    -Config Saves (new table or new DB)
+    -Config Saves (new table or new DB) (I think I have done that already)
 
 To do (hard):
     -Agnostecize the bot (Make it so that it can be used by multiple servers)
