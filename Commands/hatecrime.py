@@ -62,7 +62,7 @@ async def schewaunMode(ctx,
 async def kevinMode(ctx,
                     mode: Option(bool, name="mode", description="The mode you want to set", required=True) # type: ignore
     ):
-    if privMen.isAdmin(ctx.author):
+    if privMen.isAdmin(ctx.author) or privMen.isVorsitz(ctx.author):
         volStateHan.setKevin(mode)
         await ctx.respond(f"Kevin mode set to {mode}", ephemeral=True)
     else:
